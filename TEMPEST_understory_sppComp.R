@@ -151,5 +151,83 @@ ggplot(data=barGraphStats(data=subset(relCover, species %in% c('Berberis thunber
 #export at 1200x1200
 
 
+##### rank abundance curves #####
+coverControl <- relCover%>%
+  filter(plot=='C')%>%
+  group_by(species)%>%
+  summarise(rel_cover=mean(rel_cover))%>%
+  ungroup()
 
+rankAbundanceControl <- coverControl[order(-coverControl$rel_cover),]
+rankAbundanceControl2 <- cbind(rank=as.numeric(rownames(rankAbundanceControl)), rankAbundanceControl)
+ 
+#figure
+ggplot(data=rankAbundanceControl2, aes(x=as.numeric(rank), y=rel_cover)) +
+  geom_line() +
+  geom_point() +
+  xlab('Species Rank') +
+  ylab('Relative Cover') +
+  # scale_x_continuous(expand=c(0,0), limits=c(0.5,16), breaks=seq(0,16,5)) +
+  # scale_y_continuous(expand=c(0,0), limits=c(0,79), breaks=seq(0,79,10)) +
+  geom_text(aes(y=rel_cover, x=rank+0.5, label=species, hjust='left', vjust='bottom'), angle=25, size=5)
+#export 1200x300
 
+coverControl <- relCover%>%
+  filter(plot=='C')%>%
+  group_by(species)%>%
+  summarise(rel_cover=mean(rel_cover))%>%
+  ungroup()
+
+rankAbundanceControl <- coverControl[order(-coverControl$rel_cover),]
+rankAbundanceControl2 <- cbind(rank=as.numeric(rownames(rankAbundanceControl)), rankAbundanceControl)
+
+#figure
+ggplot(data=rankAbundanceControl2, aes(x=as.numeric(rank), y=rel_cover)) +
+  geom_line() +
+  geom_point() +
+  xlab('Species Rank') +
+  ylab('Relative Cover') +
+  # scale_x_continuous(expand=c(0,0), limits=c(0.5,16), breaks=seq(0,16,5)) +
+  # scale_y_continuous(expand=c(0,0), limits=c(0,79), breaks=seq(0,79,10)) +
+  geom_text(aes(y=rel_cover, x=rank+0.5, label=species, hjust='left', vjust='bottom'), angle=25, size=5)
+#export 1200x300
+
+freshwaterControl <- relCover%>%
+  filter(plot=='F')%>%
+  group_by(species)%>%
+  summarise(rel_cover=mean(rel_cover))%>%
+  ungroup()
+
+rankAbundanceFresh <- freshwaterControl[order(-freshwaterControl$rel_cover),]
+rankAbundanceFresh2 <- cbind(rank=as.numeric(rownames(rankAbundanceFresh)), rankAbundanceFresh)
+
+#figure
+ggplot(data=rankAbundanceFresh2, aes(x=as.numeric(rank), y=rel_cover)) +
+  geom_line() +
+  geom_point() +
+  xlab('Species Rank') +
+  ylab('Relative Cover') +
+  # scale_x_continuous(expand=c(0,0), limits=c(0.5,16), breaks=seq(0,16,5)) +
+  # scale_y_continuous(expand=c(0,0), limits=c(0,79), breaks=seq(0,79,10)) +
+  geom_text(aes(y=rel_cover, x=rank+0.5, label=species, hjust='left', vjust='bottom'), angle=25, size=5)
+#export 1200x300
+
+saltwaterControl <- relCover%>%
+  filter(plot=='S')%>%
+  group_by(species)%>%
+  summarise(rel_cover=mean(rel_cover))%>%
+  ungroup()
+
+rankAbundanceSalt <- saltwaterControl[order(-saltwaterControl$rel_cover),]
+rankAbundanceSalt2 <- cbind(rank=as.numeric(rownames(rankAbundanceSalt)), rankAbundanceSalt)
+
+#figure
+ggplot(data=rankAbundanceSalt2, aes(x=as.numeric(rank), y=rel_cover)) +
+  geom_line() +
+  geom_point() +
+  xlab('Species Rank') +
+  ylab('Relative Cover') +
+  # scale_x_continuous(expand=c(0,0), limits=c(0.5,16), breaks=seq(0,16,5)) +
+  # scale_y_continuous(expand=c(0,0), limits=c(0,79), breaks=seq(0,79,10)) +
+  geom_text(aes(y=rel_cover, x=rank+0.5, label=species, hjust='left', vjust='bottom'), angle=25, size=5)
+#export 1200x300
